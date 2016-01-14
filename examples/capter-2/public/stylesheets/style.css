@@ -1,0 +1,13 @@
+*{padding:0;margin:0;}
+.content{
+  width:70%;
+  margin:30px auto;
+}
+.room{
+  background-color: #eee;
+}
+.messages{
+  height:300px;
+  overflow: auto;
+  background-color: #fafafa;
+}
