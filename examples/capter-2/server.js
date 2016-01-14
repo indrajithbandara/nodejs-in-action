@@ -2,6 +2,8 @@ var http = require('http');
 var fs = require('fs');
 var path = require('path');
 var mime = require('mime');
+var chatServer = require('./lib/chat_server');
+chatServer.listen(server);
 var cache = {};
 
 /**
@@ -64,7 +66,6 @@ function serveStatic(response, cache, abspath) {
 
 var server = http.createServer(function(request, response){
   var filePath = false;
-  console.log(request.url);
   if(request.url === '/') {
     filePath = 'public/index.html';
   } else {
