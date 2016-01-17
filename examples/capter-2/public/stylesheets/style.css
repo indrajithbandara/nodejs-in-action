@@ -11,3 +11,23 @@
   overflow: auto;
   background-color: #fafafa;
 }
+#room-list{
+  float: right;
+  width: 100px;
+  height:300px;
+  overflow: hidden;
+}
+#room-list div{
+  border-bottom: 1px solid #eee;
+}
+#room-list div:hover{
+  background-color: #ddd;
+}
+#send-message {
+  width:700px;
+  margin-bottom: 1em;
+  margin-right: 1em;
+}
+#help{
+  font:10px;
+}
