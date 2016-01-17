@@ -7,3 +7,30 @@
 ```javascript
 module.exports = exoprts = myFun;
 ```
+- require 的模块可以是文件夹，文件夹中必须有index.js，或有package.json，且为JSON格式，有main字段指明替换index.js文件的模块入口.
+
+### 异步编程技术
+两种响应逻辑管理方式：回调和事件监听
+- 回调通常用来定义一次性响应的逻辑。事件监听器本质也是回调，响应重复性事件。
+创建一个telnet 连接，新建文件 echo_server.js
+```javascript
+var net = require('net');
+var server = net.createServer(function(socket){
+  // 只运行一次可使用socket.once('data', function(data){})
+  socket.on('data', function(data){
+    socket.write(data);
+  });
+});
+server.listen(8888);
+```
+新开命令行，运行 <code>telnet 127.0.0.1 8888</code>，
+- 创建事件发射器，事件可以为任意字符串，除了用 <code>on</code>，还可以用<code>addListener</code>，最后监听后需要emit激活
+```javascript
+var EventEmitter = require('events').EventEmitter;
+var channel = new EventEmitter();
+channel.on('join', function(){
+  console.log('welcome!');
+});
+// 激活
+channel.emit('join');
+```
