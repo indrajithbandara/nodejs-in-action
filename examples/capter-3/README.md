@@ -24,7 +24,7 @@ var server = net.createServer(function(socket){
 server.listen(8888);
 ```
 新开命令行，运行 <code>telnet 127.0.0.1 8888</code>，
-- 创建事件发射器，事件可以为任意字符串，除了用 <code>on</code>，还可以用<code>addListener</code>，最后监听后需要emit激活
+- 创建事件发射器，事件可以为任意字符串，有一个特殊事件<code>error</code>。除了用 <code>on</code>，还可以用<code>addListener</code>，最后监听后需要emit激活
 ```javascript
 var EventEmitter = require('events').EventEmitter;
 var channel = new EventEmitter();
