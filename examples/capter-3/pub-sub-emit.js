@@ -5,6 +5,9 @@ var net = require('net');
 var channel = new events.EventEmitter();
 channel.clients = {};
 channel.on('join', function(id, client) {
+  // 查看已经连接的用户数  this.listeners
+  var welcome = 'Welcom Guest online: ' + this.listeners('broadcast').length;
+  client.write(Welcome);
   this.clients[id] = client;
   this.subscriptions[id] = function(senderId, message) {
     if(id !== senderId) {
@@ -13,6 +16,8 @@ channel.on('join', function(id, client) {
   }
   this.on('broadcast', this.subscriptions[id]);
 });
+// 设置最大连接数
+channel.setMaxListeners(50);
 channel.on('leave', function(id){
   channel.removeListener('broadcast', this.subscriptions[id]);
   channel.emit('broadcast', id, id + 'has left');

@@ -34,3 +34,27 @@ channel.on('join', function(){
 // 激活
 channel.emit('join');
 ```
+- 错误处理
+可以发出error类型事件发射器
+```javascript
+var events = require('events');
+var myEmitter = new events.EventEmitter();
+myEmitter.on('error', function(err){
+  console.log('ERROR:' + err.message);
+});
+myEmitter.emit('error', new Error('error message'));
+```
+如果发出的error类型事件没有作为第二个参数的error对象，堆栈会报错并停止执行。可以用已经废除的方法处理这个错误。
+```javascript
+process.on('uncaughtException', function(err){
+  console.error(err.stack);
+  process.exit(1);
+});
+```
+- 扩展事件监听器：文件监听器
+监视目录，并将文件复制到一个单独目录中。分以下三部：
+```
+(1) 创建类的构造器
+(2) 继承事件发射器行为
+(3) 扩展这些行为
+```
