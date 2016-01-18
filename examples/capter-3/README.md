@@ -58,3 +58,4 @@ process.on('uncaughtException', function(err){
 (2) 继承事件发射器行为
 (3) 扩展这些行为
 ```
+- 实行串行化流程控制
