@@ -58,4 +58,6 @@ process.on('uncaughtException', function(err){
 (2) 继承事件发射器行为
 (3) 扩展这些行为
 ```
-- 实行串行化流程控制
+- 实现串行化流程控制
+参见本节 <code>random_story</code> 目录
+- 实现并行计算流程控制
