@@ -61,3 +61,6 @@ process.on('uncaughtException', function(err){
 - 实现串行化流程控制
 参见本节 <code>random_story</code> 目录
 - 实现并行计算流程控制
+- 流行的流程控制工具
+<code>Nimble</code> <code>Step</code> <code>Seq</code>
+[code](./asyAction/asyAction.js)
