@@ -29,3 +29,18 @@ response.end('hello tt')
 ```javascript
 response.statusCode=302
 ```
+### 构建RESTful web 服务
+读取新数据会触发 <code>data</code> 事件，数据全部读取完之后出发 <code>end</code> 事件。
+```javascript
+req.setEncoding('utf8');
+req.on('data', function(chunk){
+  // 数据chunk默认为Buffer对象，通过前一行setEncoding('utf8')转码;
+  console.log('parsed', chunk);
+});
+req.on('end', function(){
+  // 数据全部读取完出发end事件
+  console.log('done');
+  res.end();
+});
+```
+查看请求的方法 <code>req.method</code>，设置编码 <code>req.setEncoding('utf8')</code>
