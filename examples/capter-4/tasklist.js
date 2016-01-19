@@ -25,6 +25,20 @@ var server = http.createServer(function(req, res){
       res.setHeader('Content-type', 'text/plain; charset="utf-8"');
       res.end(body);
       break;
+    case 'DELETE':
+      var path = url.parse(req.url).pathname;
+      var i = parseInt(path.slice(1), 10);
+      if(isNaN(i)) {
+        res.statusCode = 400;
+        res.end('Invalid item id');
+      } else if (!items[i]) {
+        res.statusCode = 404;
+        res.end('Item not found');
+      } else {
+        items.splice(i, 1);
+        res.end('OK\n');
+      }
+      break;
   }
 });
 server.listen(3000);
@@ -34,6 +48,12 @@ server.listen(3000);
  * curl -d 'hello' http://localhost:3000
  * curl -d 'world' http://localhost:3000
  *
- *  执行下面命令获取缓存列表
+ *  执行下面命令获可取缓存列表
+ *  curl http://localhost:3000
+ *
+ * 继续运行下面命令删除某条缓存
+ * curl -X http://localhost:3000/1
+ *
+ *  执行下面命令获可取缓存列表
  *  curl http://localhost:3000
  */
