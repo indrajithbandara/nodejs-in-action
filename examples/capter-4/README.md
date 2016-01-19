@@ -30,7 +30,7 @@ response.end('hello tt')
 response.statusCode=302
 ```
 ### 构建RESTful web 服务
-读取新数据会触发 <code>data</code> 事件，数据全部读取完之后出发 <code>end</code> 事件。
+- 读取新数据会触发 <code>data</code> 事件，数据全部读取完之后出发 <code>end</code> 事件。
 ```javascript
 req.setEncoding('utf8');
 req.on('data', function(chunk){
@@ -43,4 +43,5 @@ req.on('end', function(){
   res.end();
 });
 ```
-查看请求的方法 <code>req.method</code>，设置编码 <code>req.setEncoding('utf8')</code>
+- 查看请求的方法 <code>req.method</code>，设置编码 <code>req.setEncoding('utf8')</code>;
+- 注意 <code>Content-Length</code> 返回的应该是字节数，非字符串长度，因此不能使用body.length，使用 <code>Buffer.byteLength</code>
