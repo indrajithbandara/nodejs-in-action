@@ -46,3 +46,6 @@ req.on('end', function(){
 - 查看请求的方法 <code>req.method</code>，设置编码 <code>req.setEncoding('utf8')</code>;
 - 注意 <code>Content-Length</code> 返回的应该是字节数，非字符串长度，因此不能使用body.length，使用 <code>Buffer.byteLength</code>
 - 通过 <code>curl</code> 命令测试post、get、delete、put [tasklist.js](./tasklist.js)
+### 静态文件服务器
+
+参考：[目录遍历攻击](http://en.wikipedia.org/wiki/Directory_traversal_attack)
