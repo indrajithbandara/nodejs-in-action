@@ -49,3 +49,15 @@ req.on('end', function(){
 ### 静态文件服务器
 
 参考：[目录遍历攻击](http://en.wikipedia.org/wiki/Directory_traversal_attack)
+- 特殊变量 **__dirname**，返回当前目录路径
+读取一个文件，并把内容写到另一个内容中
+```javascript
+var readStream = fs.createReadStream('./test.txt');
+var writeStream = fs.createWriteStream('./copy.txt');
+readStream.pipe(writeStream);
+```
+所有ReadableStream都能接入任何一个 WritableStream 。http请求对象就是ReadableStream，可以如下方式流入到文件中
+```javascript
+res.pipe(fs.createWriteStream('./res.txt'));
+```
+关于stream流介绍：[stream-handhook](https://github.com/substack/stream-handbook);
