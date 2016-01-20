@@ -61,3 +61,16 @@ readStream.pipe(writeStream);
 res.pipe(fs.createWriteStream('./res.txt'));
 ```
 关于stream流介绍：[stream-handhook](https://github.com/substack/stream-handbook);
+- 所有继承了 EventEmitter 的类都可能发出error事件。默认情况下，如果没有监听器，error事件会被抛出，会搞垮服务器。可以添加以下代码让前端更好的显示。
+```javascript
+stream.pipe(res);
+stream.on('error', function(){
+  res.statusCode = 500;
+  res.end('服务器错误');
+})
+```
+- 使用fs.stat(path, callback) 得到文件信息，如果找不到文件，<code>error.code</code> 会为 <code>"ENOENT"</code> 提前处理，代码 [stat.js](./stat.js)
+- 接受表单输入
+提交表单的 <code>Content-Type</code> 有两个值：    
+**application/x-www-form-urlencoded** :HTML表单默认值    
+**multipart/form-data** :表单中含有文件或非ASCII或二进制数据时使用    
