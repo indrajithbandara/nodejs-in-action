@@ -74,3 +74,9 @@ stream.on('error', function(){
 提交表单的 <code>Content-Type</code> 有两个值：    
 **application/x-www-form-urlencoded** :HTML表单默认值    
 **multipart/form-data** :表单中含有文件或非ASCII或二进制数据时使用，如type='file'类型   
+- <code>querystring</code> 模块
+```javascript
+var qs = require('querystring');
+qs.parse('a=test');
+// {a: "test"};
+```
