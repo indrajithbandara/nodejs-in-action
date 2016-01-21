@@ -73,4 +73,4 @@ stream.on('error', function(){
 - 接受表单输入
 提交表单的 <code>Content-Type</code> 有两个值：    
 **application/x-www-form-urlencoded** :HTML表单默认值    
-**multipart/form-data** :表单中含有文件或非ASCII或二进制数据时使用    
+**multipart/form-data** :表单中含有文件或非ASCII或二进制数据时使用，如type='file'类型   
