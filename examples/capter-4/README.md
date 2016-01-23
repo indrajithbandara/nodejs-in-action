@@ -93,3 +93,31 @@ form.on('progress', function(bytesReceived,bytesExpected){
 });
 ```
 插件地址：[formidable](https://github.com/felixge/node-formidable)
+
+### 用HTTPS加强程序的安全性
+https将http与TLS/SSL传输层结合在一起。    
+- 概念介绍
+**密钥**：密钥存放在服务器的文件内    
+**证书**：证书可以全世界分享，它包含了公钥和证书所有者信息    
+**公钥**：用来加密从客户端发往服务器的数据    
+- 生成名为 <code>key.pem</code> 私钥,私钥一般放在~/.ssh目录中
+```javascript
+openssl genrsa 1024 > key.pem
+```
+- 创建证书需要私钥，下面生成名为 <code>key-cert.pem</code> 的证书
+```javascript
+openssl req -x509 -new -key key.pem > key-cert.pem
+```
+- 创建https服务器 [https](./https/index.js)
+```javascript
+var https = require('https');
+var fs = require('fs');
+var options = {
+  key: fs.readFileSync('./tmp/key.pem'),
+  cert: fs.readFileSync('./tmp/key-cert.pem')
+}
+https.createServer(function(req, res){
+  res.writeHead('200');
+  res.end('hello https');
+}).listen(3000);
+```
