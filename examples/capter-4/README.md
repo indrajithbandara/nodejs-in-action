@@ -80,3 +80,5 @@ var qs = require('querystring');
 qs.parse('a=test');
 // {a: "test"};
 ```
+- 使用formidable 处理文件上传 ,[formidable](./formidable/formidable.js)
+插件地址：[formidable](https://github.com/felixge/node-formidable)
