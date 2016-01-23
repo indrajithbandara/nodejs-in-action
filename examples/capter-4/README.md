@@ -81,4 +81,15 @@ qs.parse('a=test');
 // {a: "test"};
 ```
 - 使用formidable 处理文件上传 ,[formidable](./formidable/formidable.js)
+```javascript
+// 实例化form
+var form = new formidable.IncomingForm();
+```
+计算文件上传进度 <code>form.on('progress', function(bytesReceived, bytesExpected))</code>
+```javascript
+form.on('progress', function(bytesReceived,bytesExpected){
+  var percent = Math.floor(bytesReceived/bytesExpected*100);
+  console.log(percent);
+});
+```
 插件地址：[formidable](https://github.com/felixge/node-formidable)

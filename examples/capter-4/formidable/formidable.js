@@ -36,6 +36,11 @@ function upload(req, res){
   form.on('end', function(){
     res.end('upload complete');
   });
+  // 计算上传进度
+  form.on('progress', function(bytesReceived,bytesExpected){
+    var percent = Math.floor(bytesReceived/bytesExpected*100);
+    console.log(percent);
+  });
   form.uploadDir = './upload';
   form.encoding= 'utf-8';
   form.parse(req);
