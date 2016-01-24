@@ -194,3 +194,64 @@ collection.remove(
 ```linux
 npm install mongoose
 ```
+- 连接打开关闭
+```javascript
+// 建立连接
+var mongoose = require('mongoose');
+var db = mongoose.connect('mongoose://localhost/tasks')
+// 关闭连接
+mongoose.disconnect();
+```
+- 注册schema，定义数据结构，设置默认值，处理输入，校验等，[官方文档](http://mongoosejs.com/docs/schematypes.html)
+```javascript
+var Schema = mongoose.schema;
+var Tasks = new Schema({
+  project: String,
+  description: String
+});
+mongoose.model('Task', Tasks);
+```
+- 添加任务
+```javascript
+var Task = mongoose.model('Task');
+var task = Task();
+task.project = 'test';
+task.description = 'my test mongose';
+task.save(function(err){
+  if(err) throw err;
+  console.log('saved');
+})
+```
+- 搜索文档
+```javascript
+var Task = mongoose.model('Task');
+Task.find({'project': 'test'},function(err, tasks){
+  if(err) throw err;
+  for(var i = 0;i < tasks.length;i++) {
+    console.log('id is :' + tasks[0]._id);
+    console.log('description :' + tasks[0].description);
+  }
+});
+```
+- 更新文档
+```javascript
+var Task = mongoose.model('Task');
+Task.update(
+  {_id: '23o4o23423j2k34444'},
+  {description: 'my test 2'},
+  // false 代表只更新一个文档
+  {multi: false},
+  function(err, rows_update){
+    if(err) throw err;
+    console.log('updated');
+  }
+)
+```
+- 删除文档
+```javascript
+var Task = mongoose.model('Task');
+Task.findById('23o4o23423j2k34444', function(err, task){
+  if(err) throw err;
+  task.remove();
+});
+```
