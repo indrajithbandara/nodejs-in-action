@@ -70,3 +70,34 @@ module.exports = setup;
 #### 构建路由中间件
 简单路由过程参见书本 [index.js](./router/index.js) [router.js](./router/router.js)
 
+### 使用错误处理中间件
+错误处理中间件函数必须接受四个参数：err, req, res, next
+```javascript
+function errHandler(){
+  var env = process.env.NODE_ENV || 'development';
+  return function(err, req, res, next){
+    res.statusCode = 500;
+    switch(env){
+      case 'development':
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify(err));
+        break;
+      default:
+        res.end('Server Error');
+    }
+  }
+}
+```
+<code>NODE_ENV</code> 通常作为环境变量
+- 挂载中间件 api 挂载到 <code>/api</code> 目录下
+```javascript
+var api = connect()
+  .use(users)
+  .use(pets)
+  .use(errHandler)
+var app = conect()
+  .use(hello)
+  .use('/api', api)
+  .use(errorPage)
+  .listen(3000)
+```
