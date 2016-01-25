@@ -67,3 +67,6 @@ function setup(format){
 }
 module.exports = setup;
 ```
+#### 构建路由中间件
+简单路由过程参见书本 [index.js](./router/index.js) [router.js](./router/router.js)
+
