@@ -103,3 +103,7 @@ var app = connect()
 ### 实现 Web 程序核心功能的中间件
 logger(),favicon(),methodOverride(),vhost(),session()
 #### logger() 日志 ，现在为morgan()
+### 实现 Web 程序安全的中间件
+basicAuth(),csrf(),errorHandler()
+### 静态文件服务器中间件
+static(),compress(),directory()
