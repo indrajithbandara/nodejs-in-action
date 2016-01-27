@@ -14,7 +14,8 @@ connect 中间件：
 <code>errorHandler()</code>
 <code>static()</code>
 <code>compress()</code>
-<code>directory()</code>
+<code>directory()</code>     
+**注意：** 最新API方法有变化，详情参考[connect](https://github.com/senchalabs/connect)    
 ### 解析cookie、请求主体和查询字符串的中间件
 #### cookieParser(): 解析HTTP cookie
 - 基本 [cookieParser.js](./cookieParser.js)
@@ -128,11 +129,47 @@ compress()自动通过请求头域Accept-Encoding 自动检测客户端可接受
 - 用法 [compress-base.js](./compress/compress-base.js)
 ```javascript
 var connect = require('connect');
-var compress = require('compress');
+var compression = require('compression');
 var serveStatic = require('serve-static');
 var app = connect()
-    .use(compress())
+    .use(compression())
     .use(serveStatic('public'))
     .listen(3000);
 ```
-- 使用定制过滤器
+- 使用定制过滤器 [compression-filter.js](./compress/compression-filter.js)
+```javascript
+var connect = require('connect');
+var compression = require('compression');
+var serveStatic = require('serve-static');
+function filter(req, res){
+    var type = req.headers('Content-Type') || '';
+    return 0 === type.indexOf('text/plain');
+}
+var app = connect()
+    .use(compression({filter: filter}))
+    .use(serveStatic('public'))
+    .listen(3000);
+
+```
+- 指定压缩及内存水平
+```javascript
+connect()
+    .use(compression({level:3, memlevel:8}))
+// level:3 代表压缩水平更低，但更快，memlevel:8表示使用更多的内存
+```
+#### directory()目录列表，配合static使用，新版改为 [serve-index](https://www.npmjs.com/package/serve-index)
+- 用法
+```javascript
+var serveIndex = require('serve-index');
+var serveStatic = require('serve-static');
+```
+- 使用挂载,可以添加任意的路径前缀
+```javascript
+var serveIndex = require('serve-index');
+var serveStatic = require('serve-static');
+var app = connect()
+    .use('/files', serveIndex('public', {icons: true, hidden: true}))
+    .use('/files', serveStatic('public', { hidden: true}))
+    .listen(3000);
+// icons用来启用图标,hidden 表明两个组件都可以查看并返回隐藏文件
+```
