@@ -107,3 +107,32 @@ logger(),favicon(),methodOverride(),vhost(),session()
 basicAuth(),csrf(),errorHandler()
 ### 静态文件服务器中间件
 static(),compress(),directory()
+#### 用法
+```javascript
+app.use(connect.static('public'));
+// 如当前目录public中有文件 foo.js 访问url：localhost/foo.js
+```
+#### 挂载,指定
+```javascript
+app.use('/app/files', connect.static('public'));
+// 相当于把第一个参数挂载到public下，访问url：localhost/app/files/foo.js
+// 其实public被解析为: process.cwd() + '/public'
+```
+#### 使用相对、绝对路径
+```jvascript
+app.use('/app/files', connect.static(__dirname + '/public'));
+// static中的路径都是相对当前路径,如果使用绝对路径时用 __dirname
+```
+#### compress() 压缩静态文件
+compress()自动通过请求头域Accept-Encoding 自动检测客户端可接受的编码。如果请求头中包含gzip或deflate或两者，则响应会压缩
+- 用法 [compress-base.js](./compress/compress-base.js)
+```javascript
+var connect = require('connect');
+var compress = require('compress');
+var serveStatic = require('serve-static');
+var app = connect()
+    .use(compress())
+    .use(serveStatic('public'))
+    .listen(3000);
+```
+- 使用定制过滤器
