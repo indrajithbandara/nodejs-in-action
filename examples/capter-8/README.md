@@ -29,4 +29,14 @@ app.configure('development', function（){
 });
 ```
 #### app.set(),app.enable(setting)等同于app.set(setting, true)...
-### 试图渲染
+### 视图渲染
+#### 视图系统渲染
+- 更改视图目录
+```javascript
+app.set('views', __dirname + '/views');
+```
+- 设置模板引擎
+```javascript
+app.set('view engine', 'jade');
+```
+- 视图缓存，开发环境禁用。view cache启用时，每个模板只会地区一次硬盘.
