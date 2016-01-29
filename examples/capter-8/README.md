@@ -40,3 +40,4 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 ```
 - 视图缓存，开发环境禁用。view cache启用时，每个模板只会地区一次硬盘.
+- render调用方式 <code>res.render()</code> <code>app.render()</code>，被调用时，express会先检查是否有文件在这个绝对路径上。express会尝试使用index文件
