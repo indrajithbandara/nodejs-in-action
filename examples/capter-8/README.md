@@ -41,3 +41,5 @@ app.set('view engine', 'jade');
 ```
 - 视图缓存，开发环境禁用。view cache启用时，每个模板只会地区一次硬盘.
 - render调用方式 <code>res.render()</code> <code>app.render()</code>，被调用时，express会先检查是否有文件在这个绝对路径上。express会尝试使用index文件
+- 数据传入视图，<code>res.render()</code>；app.locals传递程序层面的变量，用res.locals传递请求层面的本地变量。直接传给res.render()的值优先级要高于通过 res.locals 和 app.locals  设定的值
+- express 默认只会给视图中输出一个程序级变量 setting，这个对象中包含所有那个app.set()设定的值，比如app.set("title", 'test tt') 会把setting.title输出到模板中
