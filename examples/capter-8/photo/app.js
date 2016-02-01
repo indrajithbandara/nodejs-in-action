@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express();
-var photos = require('./Photo')
+var photos = require('./routes/photos')
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
