@@ -61,3 +61,19 @@ var schema = new mongoose.Schema({
 });
 module.exports = mongoose.model('Photo', schema);
 ```
+### 创建资源下载
+**express 处理文件传输**：    
+- res.sendfile(),浏览器会解析数据，是图片的话会显示图片
+- 变体 res.download(),提示用户下载
+```javascript
+exports.download = function(dir){
+  return function(req, res, next){
+    var id = req.params.id;
+    Photo.findById(id, function(err, photo){
+      if(err) return next(err);
+      var path = join(dir, photo.path);
+      res.sendfile(path);
+    })
+  }
+}
+```
